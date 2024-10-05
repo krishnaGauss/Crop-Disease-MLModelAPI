@@ -31,31 +31,24 @@ def predict_disease(img_array):
     result_index = np.argmax(predictions)
     return class_names[result_index]
 
-# API route to handle image uploads and return predictions
 @app.post("/predict/")
 async def predict(image: UploadFile = File(...)):
     """Receive an uploaded image, process it, and return the disease prediction."""
-    # Read image file
     image_data = await image.read()
     img = Image.open(io.BytesIO(image_data))
 
-    # Convert image to RGB if necessary
     if img.mode != "RGB":
         img = img.convert("RGB")
 
-    # Resize the image to match the input size of the model
     img = img.resize((128, 128))
 
-    # Convert image to numpy array
     img_array = keras_image.img_to_array(img)
 
-    # Get the prediction
     model_prediction = predict_disease(img_array)
 
-    # Return prediction as JSON response
     return JSONResponse(content={"prediction": model_prediction})
 
-# Run the FastAPI app using Uvicorn (in terminal):
+
 # uvicorn your_script_name:app --reload
 
 
