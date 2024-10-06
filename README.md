@@ -23,6 +23,11 @@ The API uses a pre-trained machine learning model to classify images of crop lea
 - TensorFlow/Keras
 - Other dependencies specified in `requirements.txt`
 
+## Reference
+
+![Alt text](/assets/api_integration.png)
+
+
 ## Installation
 
 ### Clone the Repository
